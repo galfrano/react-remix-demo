@@ -1,0 +1,79 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  WAITER
+  KITCHEN
+  BAR
+  MANAGER
+}
+
+enum MenuCategoryType {
+    BAR
+    KITCHEN
+}
+
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userRole UserRole @default(WAITER)
+  password Password?
+  Check    Check[]
+}
+
+model Password {
+  hash String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+}
+
+model MenuCategory {
+  id       String     @id @default(cuid())
+  category String
+  type MenuCategoryType
+  MenuItem MenuItem[]
+}
+
+model MenuItem {
+  id         String       @id @default(cuid())
+  item       String
+  price      Float
+  category   MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  categoryId String
+  CheckItem  CheckItem[]
+}
+
+model Table {
+  id    String  @id @default(cuid())
+  table String
+  Check Check[]
+}
+
+model Check {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  table     Table    @relation(fields: [tableId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  tableId   String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  userId    String
+  note      String
+  CheckItem CheckItem[]
+}
+
+model CheckItem {
+  id         String   @id @default(cuid())
+  Check      Check @relation(fields: [checkId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  checkId    String
+  createdAt  DateTime @default(now())
+  price      Float
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  menuItemId String
+}
