@@ -7,15 +7,15 @@ import { getMenuItems, getMenuItem } from "~/models/menu-item.server";
 import { getCheck } from "~/models/check.server";
 import { getCheckItems, createCheckItem } from "~/models/check-item.server";
 import { getTable } from "~/models/table.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 
 export async function loader({ request, params }: LoaderArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.checkId, "checkId not found");
   const url = new URL(request.url);
   const categories = await getMenuCategories();
   const categoryId = url.searchParams.get("category");
-  //  const items = categoryId == null ? [] : await getMenuItemsByCategory(categoryId);
+  // const items = categoryId == null ? [] : await getMenuItemsByCategory(categoryId);
   const allItems = await getMenuItems();
   const check = await getCheck({ id: params.checkId });
   if (!check) {
@@ -33,7 +33,7 @@ export async function action({ request, params }: ActionArgs) {
   const url = new URL(request.url);
   const categoryId = url.searchParams.get("category");
   const formData = await request.formData();
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.checkId, "checkId not found");
   const menuItemId = formData.get("item");
   const fullItem = await getMenuItem({ id: menuItemId });
@@ -63,6 +63,7 @@ export default function CategoryDetailsPage() {
       <Form method="get">
         {categories.map((c) => (
           <button
+            key={c.id}
             type="submit"
             name="category"
             value={c.id}
@@ -76,6 +77,7 @@ export default function CategoryDetailsPage() {
       <Form method="post">
         {items.map((i) => (
           <button
+            key={i.id}
             type="submit"
             name="item"
             value={i.id}

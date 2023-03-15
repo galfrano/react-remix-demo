@@ -3,11 +3,11 @@ import { json } from "@remix-run/node";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 import { ManagerMenuBar } from "~/common/manager-menu-bar";
 import { getTables } from "~/models/table.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 
 export async function loader({ request }: LoaderArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   // TODO: user segregation
   const list = await getTables();
   return json({ list });

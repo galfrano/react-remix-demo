@@ -1,15 +1,15 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
-import { Check, Table } from "@prisma/client";
+import type { Check, Table } from "@prisma/client";
 import { getChecks } from "~/models/check.server";
 import { getTables } from "~/models/table.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import { ManagerMenuBar } from "~/common/manager-menu-bar";
 
 export async function loader({ request }: LoaderArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   // TODO: user seggregation
   const list = await getChecks();
   const tables = await getTables();

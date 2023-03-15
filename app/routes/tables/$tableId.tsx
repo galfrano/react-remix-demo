@@ -4,10 +4,10 @@ import { Form, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import { deleteTable, getTable } from "~/models/table.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 
 export async function loader({ request, params }: LoaderArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.tableId, "tableId not found");
 
   const table = await getTable({ id: params.tableId });
@@ -18,7 +18,7 @@ export async function loader({ request, params }: LoaderArgs) {
 }
 
 export async function action({ request, params }: ActionArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.tableId, "tableId not found");
 
   await deleteTable({ id: params.tableId });

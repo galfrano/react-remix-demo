@@ -7,10 +7,10 @@ import {
   deleteMenuCategory,
   getMenuCategory,
 } from "~/models/menu-category.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 
 export async function loader({ request, params }: LoaderArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.categoryId, "categoryId not found");
 
   const category = await getMenuCategory({ id: params.categoryId });
@@ -21,7 +21,7 @@ export async function loader({ request, params }: LoaderArgs) {
 }
 
 export async function action({ request, params }: ActionArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.categoryId, "categoryId not found");
 
   await deleteMenuCategory({ id: params.categoryId });

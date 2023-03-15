@@ -4,10 +4,10 @@ import { Form, useCatch, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getMenuCategory } from "~/models/menu-category.server";
 import { deleteMenuItem, getMenuItem } from "~/models/menu-item.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 
 export async function loader({ request, params }: LoaderArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.menuItemId, "menuItemId not found");
   const menuItem = await getMenuItem({ id: params.menuItemId });
   const category = await getMenuCategory(menuItem.categoryId);
@@ -18,7 +18,7 @@ export async function loader({ request, params }: LoaderArgs) {
 }
 
 export async function action({ request, params }: ActionArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   invariant(params.menuItemId, "menuItemId not found");
 
   await deleteMenuItem({ id: params.menuItemId });

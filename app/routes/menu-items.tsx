@@ -3,12 +3,12 @@ import { json } from "@remix-run/node";
 import { Form, Link, NavLink, Outlet, useLoaderData } from "@remix-run/react";
 
 import { getMenuItems } from "~/models/menu-item.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import { ManagerMenuBar } from "~/common/manager-menu-bar";
 
 export async function loader({ request }: LoaderArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   // TODO: user segregation
   const list = await getMenuItems();
   return json({ list });

@@ -5,10 +5,10 @@ import * as React from "react";
 // import { MenuCategoryType } from "@prisma/client";
 import { createMenuItem } from "~/models/menu-item.server";
 import { getMenuCategories } from "~/models/menu-category.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 
 export async function action({ request }: ActionArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
 
   // TODO: security
   const formData = await request.formData();

@@ -1,10 +1,10 @@
 import type { ActionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import * as React from "react";
 import { createCheck } from "~/models/check.server";
 import { getTables } from "~/models/table.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 
 export async function action({ request }: ActionArgs) {
   const userId = await requireUserId(request);
@@ -24,9 +24,9 @@ export async function loader() {
 }
 
 export default function NewCheckPage() {
-  const actionData = useActionData<typeof action>();
+  // const actionData = useActionData<typeof action>();
   const { tables } = useLoaderData<typeof loader>();
-  const tableIdRef = React.useRef<HTMLButtonElement>(null);
+  // const tableIdRef = React.useRef<HTMLButtonElement>(null);
   const noteRef = React.useRef<HTMLInputElement>(null);
   return (
     <Form
@@ -52,6 +52,7 @@ export default function NewCheckPage() {
       <div>
         {tables.map((x) => (
           <button
+            key={x.id}
             type="submit"
             name="tableId"
             value={x.id}

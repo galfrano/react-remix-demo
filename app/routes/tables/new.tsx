@@ -4,10 +4,10 @@ import { Form, useActionData } from "@remix-run/react";
 import * as React from "react";
 // import { MenuCategoryType } from "@prisma/client";
 import { createTable } from "~/models/table.server";
-import { requireUserId } from "~/session.server";
+// import { requireUserId } from "~/session.server";
 
 export async function action({ request }: ActionArgs) {
-  const userId = await requireUserId(request);
+  // const userId = await requireUserId(request);
   // TODO: security
   const formData = await request.formData();
 
