@@ -4,7 +4,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-
+    "userRole" enum('WAITER', 'KITCHEN', 'BAR', 'MANAGER') not null default 'WAITER',
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
