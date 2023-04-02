@@ -4,7 +4,7 @@ import { Form, useLoaderData } from "@remix-run/react";
 import * as React from "react";
 import { createCheck } from "~/models/check.server";
 import { getTables } from "~/models/table.server";
-// import { requireUserId } from "~/session.server";
+import { requireUserId } from "~/session.server";
 
 export async function action({ request }: ActionArgs) {
   const userId = await requireUserId(request);
